@@ -89,7 +89,7 @@ class BatchOperations:
                 
                 check_sql = f"SELECT COUNT(*) FROM {table} WHERE {where_clauses}"
                 self.cursor.execute(check_sql, tuple(key_values))
-                exists = self.cursor.fetchone()['count_*'] > 0
+                exists = self.cursor.fetchone()[0] > 0
                 
                 if exists:
                     update_cols = [col for col in row.keys() if col not in key_columns]
@@ -113,3 +113,4 @@ class BatchOperations:
             self.connection.commit()
         
         return stats
+
